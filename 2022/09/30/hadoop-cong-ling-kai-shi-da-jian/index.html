@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 6.2.0">
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
@@ -707,7 +707,7 @@
 
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEB3790bbfcba10c2783aa6f7bb302cf1da?method=download&amp;shareKey=306da8106bd8d105bbf19629e4c45afc" alt="img"></p>
 <p>发现连vim都没有，于是安装vim，使用命令</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum -y <span class="token function">install</span> vim*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">yum <span class="token parameter variable">-y</span> <span class="token function">install</span> vim*<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEBf05c54754aa82065fdc60ca1d73deff3?method=download&amp;shareKey=81fa6f4936d9a6c0ee826b988abad968" alt="img">下载一会后安装成功了！</p>
 <p>之后去更改文件，需要更改的信息，ip那里分别是ip地址，子网掩码，网关，DNS服务器设置</p>
@@ -724,7 +724,7 @@
 <p>加入以下内容</p>
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEB598f40bf6119b1fa632a3429ad71e4ed?method=download&amp;shareKey=1a134434a136be5adbdd60da1049927f" alt="img"></p>
 <p>执行以下命令来更改我们的配置</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grub2-mkconfig -o /boot/grub2/grub.cfg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">grub2-mkconfig <span class="token parameter variable">-o</span> /boot/grub2/grub.cfg<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEBdb2552e5332b3a4f7ae9fa6c886d280d?method=download&amp;shareKey=9ff5e131152b3695a3b9f1d466a2843e" alt="img"></p>
 <p>之后重启虚拟机再次查看是否配置成功</p>
@@ -747,7 +747,7 @@
 <p>查看是否配置成功</p>
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEBe1a0b698deaabd65672aae1078d65baa?method=download&amp;shareKey=1ff3a25dff3c307710e90a4ff68a15e4" alt="img"></p>
 <h3 id="2-7配置ssh免密登录"><a href="#2-7配置ssh免密登录" class="headerlink" title="2.7配置ssh免密登录"></a>2.7配置ssh免密登录</h3><p>使用以下命令后，过程一直回车就行，出现以下页面就成功了</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen -t rsa<span class="token operator">&amp;&amp;</span><span class="token builtin class-name">cd</span> ~/.ssh/<span class="token operator">&amp;&amp;</span><span class="token function">cat</span> ~/.ssh/id_rsa.pub <span class="token operator">&gt;&gt;</span> ~/.ssh/authorized_keys<span class="token operator">&amp;&amp;</span><span class="token function">chmod</span> <span class="token number">600</span> ~/.ssh/authorized_keys<span class="token operator">&amp;&amp;</span><span class="token function">cat</span> ~/.ssh/authorized_keys<span class="token operator">&amp;&amp;</span>l<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ssh-keygen <span class="token parameter variable">-t</span> rsa<span class="token operator">&amp;&amp;</span><span class="token builtin class-name">cd</span> ~/.ssh/<span class="token operator">&amp;&amp;</span><span class="token function">cat</span> ~/.ssh/id_rsa.pub <span class="token operator">&gt;&gt;</span> ~/.ssh/authorized_keys<span class="token operator">&amp;&amp;</span><span class="token function">chmod</span> <span class="token number">600</span> ~/.ssh/authorized_keys<span class="token operator">&amp;&amp;</span><span class="token function">cat</span> ~/.ssh/authorized_keys<span class="token operator">&amp;&amp;</span>l<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEB252d06156f2fa745d5129c0be4d59e10?method=download&amp;shareKey=8a161b7311b24ca9e6a9513c3352b129" alt="img"></p>
 <p>master slave1 slave2都执行这个命令并且把authorized_keys（下图标红的部分），复制到master节点的authorized_keys中。</p>
@@ -768,9 +768,9 @@ systemctl stop firewalld<span aria-hidden="true" class="line-numbers-rows"><span
 
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEBb2801eb159c66861ba386dc34aede000?method=download&amp;shareKey=ed15d2632d93b6879b98d4117f3e4e8e" alt="img"></p>
 <h3 id="2-9安装JDK"><a href="#2-9安装JDK" class="headerlink" title="2.9安装JDK"></a>2.9安装JDK</h3><p>下载地址：<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html </a>之后解压到你自己创建的文件夹里，并解压到指定位置</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> -p /usr/local/java 
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> <span class="token parameter variable">-p</span> /usr/local/java 
 
-<span class="token function">tar</span> -vzxf <span class="token function">tar</span> -vzxf jdk-8u333-linux-x64<span class="token punctuation">\</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>.tar.gz -C /usr/local/java/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token function">tar</span> <span class="token parameter variable">-vzxf</span> <span class="token function">tar</span> <span class="token parameter variable">-vzxf</span> jdk-8u333-linux-x64<span class="token punctuation">\</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>.tar.gz <span class="token parameter variable">-C</span> /usr/local/java/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p>之后查看是否解压成功</p>
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEB5ec4ec9f12fb376d40cbd9e009f0fe64?method=download&amp;shareKey=9caf874016fca712a5bcba50d4b8c14b" alt="img"></p>
@@ -785,7 +785,7 @@ systemctl stop firewalld<span aria-hidden="true" class="line-numbers-rows"><span
 <p>执行代码应用环境变量，并查看是否安装成功</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">source</span> /etc/profile 
 
-java -version<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token function">java</span> <span class="token parameter variable">-version</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEB9c255e0454d62979ddcf6e81f31f3d9b?method=download&amp;shareKey=0c1dc2cc6e6291bb5356d9aa029bc865" alt="img"></p>
 <h3 id="2-10创建新用户"><a href="#2-10创建新用户" class="headerlink" title="2.10创建新用户"></a>2.10创建新用户</h3><p>创建一个名为hadoop的用户</p>
@@ -793,7 +793,7 @@ java -version<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 <span class="token function">passwd</span> hadoop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>之后查看是否创建成功</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">usermod</span> -a -6 hadoop hadoop 
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">usermod</span> <span class="token parameter variable">-a</span> <span class="token parameter variable">-6</span> hadoop hadoop 
 <span class="token function">cat</span> /etc/group<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEB3ad038e087d9ceb7154e830ded40556a?method=download&amp;shareKey=cc7165312c80b6c424ee6aa2b1864552" alt="img"></p>
@@ -1036,17 +1036,17 @@ vim yarn-site.xml
 ​    &lt;/property<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="3-3进行传输与连接"><a href="#3-3进行传输与连接" class="headerlink" title="3.3进行传输与连接"></a>3.3进行传输与连接</h3><p>传输给两个子节点</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">scp</span> -r /usr/hadoop-3.1.3/ root@slave1:/usr/<span class="token operator">&amp;&amp;</span><span class="token function">scp</span> -r /usr/hadoop-3.1.3/ root@slave2:/usr/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">scp</span> <span class="token parameter variable">-r</span> /usr/hadoop-3.1.3/ root@slave1:/usr/<span class="token operator">&amp;&amp;</span><span class="token function">scp</span> <span class="token parameter variable">-r</span> /usr/hadoop-3.1.3/ root@slave2:/usr/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>格式化namenode</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/usr/hadoop-3.1.3/bin/hdfs namenode -format<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/usr/hadoop-3.1.3/bin/hdfs namenode <span class="token parameter variable">-format</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>开启集群</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">/usr/hadoop-3.1.3/sbin/stop-all.sh<span class="token operator">&amp;&amp;</span>/usr/hadoop-3.1.3/sbin/start-dfs.sh<span class="token operator">&amp;&amp;</span>/usr/hadoop-3.1.3/sbin/start-yarn.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>查看是否成功</p>
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEB75d1d8b647424c265d7141e9afc7f589?method=download&amp;shareKey=c5433f679c85cbb36344438a411bd608" alt="img"></p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hdfs dfsadmin -report<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hdfs dfsadmin <span class="token parameter variable">-report</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>搭建成功，两个datanode一个namenode</p>
 <p>至此，hadoop搭建完毕</p>
@@ -1056,7 +1056,7 @@ vim yarn-site.xml
 <p>通过xftp文件传输以后，将数据移动到linux</p>
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEBf110befa846c21e7b80a46be518ef274?method=download&amp;shareKey=3807827cf8c019428f28bc607f1ba6c7" alt="img"></p>
 <p>之后将数据导入hadoop</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hadoop fs -mkdir -p /usr/hadoop-3.1.3/input<span class="token operator">&amp;&amp;</span>hadoop fs -put /home/20200171010204 /input/* /usr/hadoop-3.1.3/input<span class="token operator">&amp;&amp;</span>hadoop fs -ls /usr/hadoop-3.1.3/input<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hadoop fs <span class="token parameter variable">-mkdir</span> <span class="token parameter variable">-p</span> /usr/hadoop-3.1.3/input<span class="token operator">&amp;&amp;</span>hadoop fs <span class="token parameter variable">-put</span> /home/20200171010204 /input/* /usr/hadoop-3.1.3/input<span class="token operator">&amp;&amp;</span>hadoop fs <span class="token parameter variable">-ls</span> /usr/hadoop-3.1.3/input<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEB26aa65dcd9e9823f8fd69183a24abce2?method=download&amp;shareKey=2246ce0a8c9f57b2ead6e2c5dbb8d981" alt="img"></p>
 <p>导入成功，接下来开始运行</p>
@@ -1065,11 +1065,11 @@ vim yarn-site.xml
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEB6118d24d79b7408f698953cbf4dc4532?method=download&amp;shareKey=42d73ddaf5ca9545596f0c0dd9c92865" alt="img"></p>
 <p>运行成功</p>
 <p>查看output文件夹</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hadoop dfs -ls /usr/hadoop-3.1.3/output<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hadoop dfs <span class="token parameter variable">-ls</span> /usr/hadoop-3.1.3/output<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEBce5cae928788a83891dd9c297c1d6ab5?method=download&amp;shareKey=942190e3ccbbf3c39877b16a03596e5b" alt="img"></p>
 <p>打印其中的结果</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hadoop dfs -cat /usr/hadoop-3.1.3/output/part-r-00000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hadoop dfs <span class="token parameter variable">-cat</span> /usr/hadoop-3.1.3/output/part-r-00000<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>得到每一个单词的频率</p>
 <p><img src="themes/loading.gif" data-original="https://note.youdao.com/yws/api/personal/file/WEB2d0c9b924c7ec776ff4ec172d60aeac6?method=download&amp;shareKey=91c70a9375caa2624de5dc73a58786aa" alt="image-20220930110844323"></p>
@@ -2181,12 +2181,19 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script><script>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 preloadRatio: 1,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n=c[o],a=n,i=function(){c=c.filter(function(t){return n!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(n)};a.hasAttribute("bg-lazy")?(a.removeAttribute("bg-lazy"),i&&i()):(t=new Image,e=a.getAttribute("data-original"),t.onload=function(){a.src=e,a.removeAttribute("data-original"),i&&i()},a.src!==e&&(t.src=e))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
 
 </html>
