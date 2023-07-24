@@ -1,0 +1,2074 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Transformers（一）, Cat-Blog">
+    <meta name="description" content="Dreaming of becoming a data scientist, this site is used to document some of the interesting things you encounter along your learning journey">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Transformers（一） | Cat-Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.2.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+
+
+     <style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+   .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+         .loading-text{
+            font-size: 1.5rem;
+         }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+ </style>
+ <script>
+(function () {
+    const loaded = function(){
+       setTimeout(function(){
+            const loader = document.getElementById("loading-container");
+            loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+            // document.getElementById("body-wrap").style.display="flex";
+            setTimeout(function(){
+                loader.style.display="none";
+            },2500); 
+        },1000);//强制显示loading page 1s  
+    };
+    loaded();
+})()
+</script>
+
+
+
+<body>
+    
+            <div id="loading-container">
+		    <p class="loading-text">嘘~  正在从服务器偷取页面 . . . </p> 
+		    <div class="loading-image">
+			    <div></div>
+			    <div></div>
+			    <div></div>
+			    <div></div>
+			    <div></div>
+	            </div>
+            </div>
+    
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logos.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Cat-Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logos.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Cat-Blog</div>
+        <div class="logo-desc">
+            
+            Dreaming of becoming a data scientist, this site is used to document some of the interesting things you encounter along your learning journey
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/bug-cat-iu/DS-Project" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/bug-cat-iu/DS-Project" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/site%20(4).jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Transformers（一）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Transformers/">
+                                <span class="chip bg-color">Transformers</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/tool/" class="post-category">
+                                tool
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-10-03
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-07-16
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    12 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Transformers（一）"><a href="#Transformers（一）" class="headerlink" title="Transformers（一）"></a>Transformers（一）</h2><h3 id="Transformers简介-hugging-face"><a href="#Transformers简介-hugging-face" class="headerlink" title="Transformers简介(hugging face)"></a>Transformers简介(hugging face)</h3><p><a target="_blank" rel="noopener" href="https://huggingface.co/">hugging face</a>官网</p>
+<p>Transformers 提供 API 和工具来轻松下载和训练最先进的预训练模型。使用预训练模型可以降低计算成本，并节省从头开始训练模型所需的时间和资源。这些模型支持不同模式的常见任务，例如：</p>
+<p>📝 自然语言处理：文本分类、命名实体识别、问答、语言建模、摘要、翻译、多项选择和文本生成。</p>
+<p>🖼️ 计算机视觉：图像分类、对象检测和分割。</p>
+<p>🗣️ 音频：自动语音识别和音频分类。</p>
+<p>🐙 多模式：表格问答、光学字符识别、从扫描文档中提取信息、视频分类和视觉问答。</p>
+<p>🤗 Transformer 支持 PyTorch、TensorFlow 和 JAX 之间的框架互操作性。这提供了在模型生命周期的每个阶段使用不同框架的灵活性；在一个框架中用三行代码训练一个模型，然后在另一个框架中加载它以进行推理。模型还可以导出为 ONNX 和 TorchScript 等格式，以便在生产环境中部署。</p>
+<h3 id="快速浏览"><a href="#快速浏览" class="headerlink" title="快速浏览"></a>快速浏览</h3><p>这里介绍怎么快速使用Hugging face的transformers的一些基础库来进行简单任务，其中涉及到的pipeline和Autoclass将会在之后进行详细的说明。</p>
+<p>在开始之前，请确保已安装所有必要的库：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> transformers datasets<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>之后选择你喜欢的深度学习框架，比如我比较喜欢的pytorch</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pip <span class="token function">install</span> torch<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="pipeline"><a href="#pipeline" class="headerlink" title="pipeline"></a>pipeline</h3><p>pipeline() 是使用预训练模型进行推理的最简单方法。 您可以将 pipeline() 开箱即用地用于跨不同模式的许多任务。 查看下表了解一些支持的任务：</p>
+<table>
+<thead>
+<tr>
+<th><strong>任务</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>模态</strong></th>
+<th align="center"><strong>管道标识符</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>文本分类</td>
+<td>为给定的文本序列分配标签</td>
+<td>自然语言处理</td>
+<td align="center">pipeline(task=“sentiment-analysis”)</td>
+</tr>
+<tr>
+<td>文本生成</td>
+<td>生成遵循给定提示的文本</td>
+<td>自然语言处理</td>
+<td align="center">pipeline(task=“text-generation”)</td>
+</tr>
+<tr>
+<td>名称实体识别</td>
+<td>为序列中的每个标记分配一个标签（人员、组织、位置等）</td>
+<td>自然语言处理</td>
+<td align="center">pipeline(task=“ner”)</td>
+</tr>
+<tr>
+<td>问答</td>
+<td>在给定上下文和问题的情况下从文本中提取答案</td>
+<td>自然语言处理</td>
+<td align="center">pipeline(task=“question-answering”)</td>
+</tr>
+<tr>
+<td>填充蒙版(填空)</td>
+<td>预测序列中正确的掩码标记</td>
+<td>自然语言处理</td>
+<td align="center">pipeline(task=“fill-mask”)</td>
+</tr>
+<tr>
+<td>总结</td>
+<td>生成一系列文本或文档的摘要</td>
+<td>自然语言处理</td>
+<td align="center">pipeline(task=“summarization”)</td>
+</tr>
+<tr>
+<td>翻译</td>
+<td>将文本从一种语言翻译成另一种语言</td>
+<td>自然语言处理</td>
+<td align="center">pipeline(task=“translation”)</td>
+</tr>
+<tr>
+<td>图像分类</td>
+<td>为图像分配标签</td>
+<td>计算机视觉</td>
+<td align="center">pipeline(task=“image-classification”)</td>
+</tr>
+<tr>
+<td>图像分割</td>
+<td>为图像的每个单独像素分配标签（支持语义、全景和实例分割）</td>
+<td>计算机视觉</td>
+<td align="center">pipeline(task=“image-segmentation”)</td>
+</tr>
+<tr>
+<td>物体检测</td>
+<td>预测图像中对象的边界框和类别</td>
+<td>计算机视觉</td>
+<td align="center">pipeline(task=“object-detection”)</td>
+</tr>
+<tr>
+<td>音频分类</td>
+<td>为音频文件分配标签</td>
+<td>声音</td>
+<td align="center">pipeline(task=“audio-classification”)</td>
+</tr>
+<tr>
+<td>自动语音识别</td>
+<td>将音频文件中的语音提取为文本</td>
+<td>声音</td>
+<td align="center">pipeline(task=“automatic-speech-recognition”)</td>
+</tr>
+<tr>
+<td>视觉问答</td>
+<td>给定图像和问题，正确回答有关图像的问题</td>
+<td>多式联运</td>
+<td align="center">pipeline(task=“vqa”)</td>
+</tr>
+</tbody></table>
+<p>了解了pipeline()支持的一些任务后，首先创建一个 pipeline() 的实例并指定您要使用它的任务。 您可以将 pipeline() 用于前面提到的任何任务，有关受支持任务的完整列表，请查看<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/pipelines">pipeline API </a>参考。 不过，在本指南中，您将使用 pipeline() 进行情绪分析作为示例：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">from transformers <span class="token function">import</span> pipeline
+classifier <span class="token operator">=</span> pipeline<span class="token punctuation">(</span><span class="token string">"sentiment-analysis"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>pipeline下载并缓存默认的<a target="_blank" rel="noopener" href="https://huggingface.co/distilbert-base-uncased-finetuned-sst-2-english">预训练模型</a>和标记器以进行情绪分析。现在您可以<code>classifier</code>在目标文本上使用：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span>classifier<span class="token punctuation">(</span><span class="token string">'l love my wife'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment"># [{'label': 'POSITIVE', 'score': 0.9997943043708801}]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>pipeline还可以针对您喜欢的任何任务遍历整个数据集。 对于这个例子，让我们选择自动语音识别作为我们的任务：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> torch
+<span class="token keyword">from</span> transformers <span class="token keyword">import</span> pipeline
+
+speech_recognizer <span class="token operator">=</span> pipeline<span class="token punctuation">(</span><span class="token string">"automatic-speech-recognition"</span><span class="token punctuation">,</span> model<span class="token operator">=</span><span class="token string">"facebook/wav2vec2-base-960h"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>加载您想要迭代的音频数据集（有关更多详细信息，请参阅🤗 数据集<a target="_blank" rel="noopener" href="https://huggingface.co/docs/datasets/quickstart#audio">快速入门</a>例如，加载<a target="_blank" rel="noopener" href="https://huggingface.co/datasets/PolyAI/minds14">MInDS-14</a>数据集：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> datasets <span class="token keyword">import</span> load_dataset<span class="token punctuation">,</span> Audio
+
+dataset <span class="token operator">=</span> load_dataset<span class="token punctuation">(</span><span class="token string">"PolyAI/minds14"</span><span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">"en-US"</span><span class="token punctuation">,</span> split<span class="token operator">=</span><span class="token string">"train"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>您需要确保数据集的采样率与<a target="_blank" rel="noopener" href="https://huggingface.co/facebook/wav2vec2-base-960h"><code>facebook/wav2vec2-base-960h</code></a>训练过的采样率相匹配：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">dataset <span class="token operator">=</span> dataset<span class="token punctuation">.</span>cast_column<span class="token punctuation">(</span><span class="token string">"audio"</span><span class="token punctuation">,</span> Audio<span class="token punctuation">(</span>sampling_rate<span class="token operator">=</span>speech_recognizer<span class="token punctuation">.</span>feature_extractor<span class="token punctuation">.</span>sampling_rate<span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><code>"audio"</code>调用列时，音频文件会自动加载和重新采样。从前 4 个样本中提取原始波形数组并将其作为列表传递给管道：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">result <span class="token operator">=</span> speech_recognizer<span class="token punctuation">(</span>dataset<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token string">"audio"</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">[</span>d<span class="token punctuation">[</span><span class="token string">"text"</span><span class="token punctuation">]</span> <span class="token keyword">for</span> d <span class="token keyword">in</span> result<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment">#['I WOULD LIKE TO SET UP A JOINT ACCOUNT WITH MY PARTNER HOW DO I PROCEED WITH DOING THAT', "FODING HOW I'D SET UP A JOIN TO HET WITH MY WIFE AND WHERE THE AP MIGHT BE", "I I'D LIKE TOY SET UP A JOINT ACCOUNT WITH MY PARTNER I'M NOT SEEING THE OPTION TO DO IT ON THE AP SO I CALLED IN TO GET SOME HELP CAN I JUST DO IT OVER THE PHONE WITH YOU AND GIVE YOU THE INFORMATION OR SHOULD I DO IT IN THE AP AND I'M MISSING SOMETHING UQUETTE HAD PREFERRED TO JUST DO IT OVER THE PHONE OF POSSIBLE THINGS", 'HOW DO I THURN A JOIN A COUNT']</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>对于输入较大的较大数据集（例如语音或视觉），您需要传递生成器而不是列表来将所有输入加载到内存中。查看<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/main_classes/pipelines">管道 API 参考</a>以获取更多信息。</p>
+<h3 id="在管道中使用另一个模型和标记器"><a href="#在管道中使用另一个模型和标记器" class="headerlink" title="在管道中使用另一个模型和标记器"></a>在管道中使用另一个模型和标记器</h3><p><a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/pipelines#transformers.pipeline">pipeline()</a>可以容纳来自<a target="_blank" rel="noopener" href="https://huggingface.co/models">Hub</a>的任何模型，从而可以轻松地将<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/pipelines#transformers.pipeline">pipeline()</a>用于其他用例。例如，如果您想要一个能够处理法语文本的模型，请使用集线器上的标签来筛选合适的模型。最上面的过滤结果返回一个多语言<a target="_blank" rel="noopener" href="https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment">BERT 模型</a>，该模型已针对可用于法语文本的情绪分析进行了微调：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">model_name <span class="token operator">=</span> <span class="token string">"nlptown/bert-base-multilingual-uncased-sentiment"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>这里使用了pytorch框架，使用<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/model_doc/auto#transformers.AutoModelForSequenceClassification">AutoModelForSequenceClassification</a>和<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/model_doc/auto#transformers.AutoTokenizer">AutoTokenizer</a>加载预训练模型及其关联的分词器：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoTokenizer<span class="token punctuation">,</span> AutoModelForSequenceClassification
+
+model <span class="token operator">=</span> AutoModelForSequenceClassification<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span>model_name<span class="token punctuation">)</span>
+tokenizer <span class="token operator">=</span> AutoTokenizer<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span>model_name<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在pipeline()中指定模型和分词器，现在您可以应用<code>classifier</code>法语文本：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">classifier <span class="token operator">=</span> pipeline<span class="token punctuation">(</span><span class="token string">"sentiment-analysis"</span><span class="token punctuation">,</span> model<span class="token operator">=</span>model<span class="token punctuation">,</span> tokenizer<span class="token operator">=</span>tokenizer<span class="token punctuation">)</span>
+classifier<span class="token punctuation">(</span><span class="token string">"l want invent a SOTA model of cv"</span><span class="token punctuation">)</span>
+<span class="token comment">## [{'label': '5 stars', 'score': 0.39469486474990845}]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>如果您找不到适合您的用例的模型，则需要根据您的数据微调预训练模型。在您对预训练模型进行微调后，请考虑在 Hub 上与社区<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/model_sharing">分享</a>模型！🤗</p>
+<p>在幕后， <a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/model_doc/auto#transformers.AutoModelForSequenceClassification">AutoModelForSequenceClassification</a>和<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/model_doc/auto#transformers.AutoTokenizer">AutoTokenizer</a>类协同工作，为您在上面使用的<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/pipelines#transformers.pipeline">pipeline()</a>提供动力。<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/model_doc/auto">AutoClass</a>是一种快捷方式，可以从预训练模型的名称或路径中自动检索其架构。您只需要<code>AutoClass</code>为您的任务选择合适的及其相关的预处理类。</p>
+<h3 id="自动分词器"><a href="#自动分词器" class="headerlink" title="自动分词器"></a>自动分词器</h3><p>分词器负责将文本预处理为数字数组作为模型的输入。有多个规则可以管理标记化过程，包括如何分割单词以及应该在什么级别分割单词（在<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/tokenizer_summary">标记器摘要</a>中了解更多关于标记化的信息）。要记住的最重要的事情是您需要实例化具有相同模型名称的标记器，以确保您使用与模型预训练相同的标记化规则。</p>
+<p>下面加载一个分词器，使用AutoTokenizer:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoTokenizer
+
+model_name <span class="token operator">=</span> <span class="token string">"nlptown/bert-base-multilingual-uncased-sentiment"</span>
+tokenizer <span class="token operator">=</span> AutoTokenizer<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span>model_name<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>输入你要分词的文本：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">output <span class="token operator">=</span> tokenizer<span class="token punctuation">(</span><span class="token string">"Hello, y'all! How are you 😁 ?"</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>output<span class="token punctuation">)</span>
+<span class="token comment">## {'input_ids': [101, 29155, 117, 167, 112, 10367, 106, 12548, 10320, 10855, 100, 136, 102], 'token_type_ids': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>分词器返回一个字典，其中包含：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/glossary#input-ids">input_ids</a>：代币的数字表示。</li>
+<li><a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/.glossary#attention-mask">atttention_mask</a>：指示应关注哪些令牌。</li>
+</ul>
+<p>分词器还可以接受输入列表，并填充和截断文本以返回具有统一长度的批处理：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">pt_batch <span class="token operator">=</span> tokenizer<span class="token punctuation">(</span>
+    <span class="token punctuation">[</span><span class="token string">"We are very happy to show you the 🤗 Transformers library."</span><span class="token punctuation">,</span> <span class="token string">"We hope you don't hate it."</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    padding<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+    truncation<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span>
+    max_length<span class="token operator">=</span><span class="token number">512</span><span class="token punctuation">,</span>
+    return_tensors<span class="token operator">=</span><span class="token string">"pt"</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Automodel"><a href="#Automodel" class="headerlink" title="Automodel"></a>Automodel</h3><p>🤗 Transformers 提供了一种简单而统一的方法来加载预训练的实例。这意味着您可以像加载自动强化器一样加载<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/model_doc/auto#transformers.AutoTokenizer">自动模型</a>。唯一的区别是为任务选择正确的自动模型。对于文本（或序列）分类，应加载<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/model_doc/auto#transformers.AutoModelForSequenceClassification">自动模型序列分类</a>：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoModelForSequenceClassification
+
+model_name <span class="token operator">=</span> <span class="token string">"nlptown/bert-base-multilingual-uncased-sentiment"</span>
+pt_model <span class="token operator">=</span> AutoModelForSequenceClassification<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span>model_name<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>有关<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/model_doc/auto#transformers.AutoModel">自动模型</a>类支持的任务，请参阅任务<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/task_summary">摘要</a>。</p>
+</blockquote>
+<p>现在，将预处理的一批输入直接传递给模型。您只需要通过添加以下内容来解压缩字典：<code>**</code></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">pt_outputs <span class="token operator">=</span> pt_model<span class="token punctuation">(</span><span class="token operator">**</span>pt_batch<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>模型输出属性中的最终激活。将 softmax 函数应用于logits检索概率：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> torch <span class="token keyword">import</span> nn
+
+pt_predictions <span class="token operator">=</span> nn<span class="token punctuation">.</span>functional<span class="token punctuation">.</span>softmax<span class="token punctuation">(</span>pt_outputs<span class="token punctuation">.</span>logits<span class="token punctuation">,</span> dim<span class="token operator">=</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>pt_predictions<span class="token punctuation">)</span>
+<span class="token comment">##tensor([[0.0021, 0.0018, 0.0115, 0.2121, 0.7725],</span>
+<span class="token comment">##        [0.2084, 0.1826, 0.1969, 0.1755, 0.2365]], grad_fn=&lt;SoftmaxBackward0&gt;)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="保存模型"><a href="#保存模型" class="headerlink" title="保存模型"></a>保存模型</h3><p>一旦您的模型被微调，您可以使用<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/model#transformers.PreTrainedModel.save_pretrained">PreTrainedModel.save_pretrained()</a>将其与其分词器一起保存：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">pt_save_directory <span class="token operator">=</span> <span class="token string">"./pt_save_pretrained"</span>
+tokenizer<span class="token punctuation">.</span>save_pretrained<span class="token punctuation">(</span>pt_save_directory<span class="token punctuation">)</span>
+pt_model<span class="token punctuation">.</span>save_pretrained<span class="token punctuation">(</span>pt_save_directory<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>当您准备好再次使用该模型时，请使用 <a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/model#transformers.PreTrainedModel.from_pretrained">PreTrainedModel.from_pretrained()</a>重新加载它：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">pt_model <span class="token operator">=</span> AutoModelForSequenceClassification<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span><span class="token string">"./pt_save_pretrained"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>一个特别方便的Transformers功能是能够保存模型并将其重新加载为PyTorch或TensorFlow模型。或参数可以将模型从一个框架转换为另一个框架：<code>from_pt</code>or<code>from_tf</code>,在torch中如下:</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoModel
+
+tokenizer <span class="token operator">=</span> AutoTokenizer<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span>tf_save_directory<span class="token punctuation">)</span>
+pt_model <span class="token operator">=</span> AutoModelForSequenceClassification<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span>tf_save_directory<span class="token punctuation">,</span> from_tf<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="自定义模型构建"><a href="#自定义模型构建" class="headerlink" title="自定义模型构建"></a>自定义模型构建</h3><p>您可以修改模型的配置类以更改模型的生成方式。该配置指定模型的属性，例如隐藏层或注意头的数量。从自定义配置类初始化模型时，可以从头开始。模型属性是随机初始化的，您需要先训练模型，然后才能使用它来获得有意义的结果。</p>
+<p>首先导入<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/model_doc/auto#transformers.AutoConfig">自动配置</a>，然后加载要修改的预训练模型。在<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/model_doc/auto#transformers.AutoConfig.from_pretrained">AutoConfig.from_pretrained()中</a>，您可以指定要更改的属性，例如注意头的数量：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoConfig
+
+my_config <span class="token operator">=</span> AutoConfig<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span><span class="token string">"distilbert-base-uncased"</span><span class="token punctuation">,</span> n_heads<span class="token operator">=</span><span class="token number">12</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>在pytorch中使用，</p>
+<p>使用 <a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/model_doc/auto#transformers.FlaxAutoModelForVision2Seq.from_config">AutoModel.from_config（）</a>从自定义配置创建模型：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoModel
+
+my_model <span class="token operator">=</span> AutoModel<span class="token punctuation">.</span>from_config<span class="token punctuation">(</span>my_config<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Trainer-PyTorch-优化的训练循环"><a href="#Trainer-PyTorch-优化的训练循环" class="headerlink" title="Trainer-PyTorch 优化的训练循环"></a>Trainer-PyTorch 优化的训练循环</h3><p>所有模型都是标准的 <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/nn.html#torch.nn.Module"><code>torch.nn.Module</code></a>因此您可以在任何典型的训练循环中使用它们。虽然您可以编写自己的训练循环，但变形金刚为PyTorch提供了一个<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/trainer#transformers.Trainer">训练器</a>类，其中包含基本的训练循环，并为分布式训练，混合精度等功能添加了附加功能。</p>
+<p>根据您的任务，您通常会将以下参数传递给Trainer：</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/model#transformers.PreTrainedModel">预训练模型</a>或<a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/nn.html#torch.nn.Module"><code>torch.nn.Module</code></a>：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoModelForSequenceClassification
+
+model <span class="token operator">=</span> AutoModelForSequenceClassification<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span><span class="token string">"distilbert-base-uncased"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/trainer#transformers.TrainingArguments">训练参数</a>包含您可以更改的模型超参数，如学习速率、批大小和要训练的 epoch 数。如果未指定任何训练参数，则使用默认值：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> TrainingArguments
+
+training_args <span class="token operator">=</span> TrainingArguments<span class="token punctuation">(</span>
+     output_dir<span class="token operator">=</span><span class="token string">"path/to/save/folder/"</span><span class="token punctuation">,</span>
+     learning_rate<span class="token operator">=</span><span class="token number">2e-5</span><span class="token punctuation">,</span>
+     per_device_train_batch_size<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">,</span>
+     per_device_eval_batch_size<span class="token operator">=</span><span class="token number">8</span><span class="token punctuation">,</span>
+     num_train_epochs<span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>预处理类，如分词器、特征提取器或处理器：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoTokenizer
+
+tokenizer <span class="token operator">=</span> AutoTokenizer<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span><span class="token string">"distilbert-base-uncased"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>预处理的训练和测试数据集：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">train_dataset <span class="token operator">=</span> dataset<span class="token punctuation">[</span><span class="token string">"train"</span><span class="token punctuation">]</span>  <span class="token comment"># doctest: +SKIP</span>
+eval_dataset <span class="token operator">=</span> dataset<span class="token punctuation">[</span><span class="token string">"eval"</span><span class="token punctuation">]</span>  <span class="token comment"># doctest: +SKIP</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>从数据集创建一批示例：<code>DataCollator()</code></p>
+</li>
+</ol>
+   <pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> DefaultDataCollator
+
+data_collator <span class="token operator">=</span> DefaultDataCollator<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>现在，在trainer中收集所有这些任务：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> Trainer
+
+trainer <span class="token operator">=</span> Trainer<span class="token punctuation">(</span>
+     model<span class="token operator">=</span>model<span class="token punctuation">,</span>
+     args<span class="token operator">=</span>training_args<span class="token punctuation">,</span>
+     train_dataset<span class="token operator">=</span>dataset<span class="token punctuation">[</span><span class="token string">"train"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+     eval_dataset<span class="token operator">=</span>dataset<span class="token punctuation">[</span><span class="token string">"test"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+     tokenizer<span class="token operator">=</span>tokenizer<span class="token punctuation">,</span>
+     data_collator<span class="token operator">=</span>data_collator<span class="token punctuation">,</span>
+ <span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>准备就绪后，让trainer开始训练：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">trainer<span class="token punctuation">.</span>train<span class="token punctuation">(</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>对于使用序列到序列模型的任务（如翻译或汇总），请改用 <a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/trainer#transformers.Seq2SeqTrainer">Seq2SeqTrainer</a> 和 <a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/trainer#transformers.Seq2SeqTrainingArguments">Seq2Seq训练参数</a>类。</p>
+<p>您可以通过在trainer集成，并检查训练循环以报告进度或提前停止训练。回调不会修改训练循环本身的任何内容。要自定义类似损失函数的内容，您需要改为对训练器进行子类化。</p>
+<h3 id="使用tensorflow训练"><a href="#使用tensorflow训练" class="headerlink" title="使用tensorflow训练"></a>使用tensorflow训练</h3><p>所有模型都是标准的 <a target="_blank" rel="noopener" href="https://www.tensorflow.org/api_docs/python/tf/keras/Model"><code>tf.keras.Model</code></a>因此可以使用 <a target="_blank" rel="noopener" href="https://keras.io/">Keras</a> API 在张量流中训练它们。transformers提供了<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/model#transformers.TFPreTrainedModel.prepare_tf_dataset">prepare_tf_dataset()</a>方法，可以轻松加载您的数据集，以便您可以立即开始使用Keras的<a target="_blank" rel="noopener" href="https://keras.io/api/models/model_training_apis/#compile-method"><code>compile</code></a>和<a target="_blank" rel="noopener" href="https://keras.io/api/models/model_training_apis/#fit-method"><code>fit</code></a>训练。</p>
+<ol>
+<li><p>您将从<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/model#transformers.TFPreTrainedModel">TFPreTrainedModel</a>或 <a target="_blank" rel="noopener" href="https://www.tensorflow.org/api_docs/python/tf/keras/Model"><code>tf.keras.Model</code></a>开始：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> TFAutoModelForSequenceClassification
+
+model <span class="token operator">=</span> TFAutoModelForSequenceClassification<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span><span class="token string">"distilbert-base-uncased"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>预处理类，如分词器、特征提取器或处理器：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> transformers <span class="token keyword">import</span> AutoTokenizer
+
+tokenizer <span class="token operator">=</span> AutoTokenizer<span class="token punctuation">.</span>from_pretrained<span class="token punctuation">(</span><span class="token string">"distilbert-base-uncased"</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>创建一个函数来标记数据集：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">tokenize_dataset</span><span class="token punctuation">(</span>dataset<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	<span class="token keyword">return</span> tokenizer<span class="token punctuation">(</span>dataset<span class="token punctuation">[</span><span class="token string">"text"</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>使用<a target="_blank" rel="noopener" href="https://huggingface.co/docs/datasets/v2.5.1/en/package_reference/main_classes#datasets.Dataset.map">map</a>将分词器应用于整个数据集，然后将数据集和分词器传递给<a target="_blank" rel="noopener" href="https://huggingface.co/docs/transformers/v4.22.2/en/main_classes/model#transformers.TFPreTrainedModel.prepare_tf_dataset">prepare_tf_dataset()</a>。如果您愿意，还可以在此处更改批大小并随机排列数据集：</p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python">dataset <span class="token operator">=</span> dataset<span class="token punctuation">.</span><span class="token builtin">map</span><span class="token punctuation">(</span>tokenize_dataset<span class="token punctuation">)</span>
+tf_dataset <span class="token operator">=</span> model<span class="token punctuation">.</span>prepare_tf_dataset<span class="token punctuation">(</span>
+    dataset<span class="token punctuation">,</span> batch_size<span class="token operator">=</span><span class="token number">16</span><span class="token punctuation">,</span> shuffle<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> tokenizer<span class="token operator">=</span>tokenizer
+<span class="token punctuation">)</span>  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>准备就绪后，您可以开始培训：<code>compile</code>and<code>fit</code></p>
+<pre class="line-numbers language-python" data-language="python"><code class="language-python"><span class="token keyword">from</span> tensorflow<span class="token punctuation">.</span>keras<span class="token punctuation">.</span>optimizers <span class="token keyword">import</span> Adam
+
+model<span class="token punctuation">.</span><span class="token builtin">compile</span><span class="token punctuation">(</span>optimizer<span class="token operator">=</span>Adam<span class="token punctuation">(</span><span class="token number">3e-5</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+model<span class="token punctuation">.</span>fit<span class="token punctuation">(</span>dataset<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ol>
+<p>End!</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">democat</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://47.108.193.254/2022/10/03/transformers1/">https://47.108.193.254/2022/10/03/transformers1/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">democat</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Transformers/">
+                                    <span class="chip bg-color">Transformers</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="qq,wechat,facebook,google" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid="></script>
+    <div class="addthis_inline_share_toolbox"></div>
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">攒钱去养猫</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/zhifubao.png" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+        <style>
+    .valine-card {
+        margin: 1.5rem auto;
+    }
+
+    .valine-card .card-content {
+        padding: 20px 20px 5px 20px;
+    }
+
+    #vcomments textarea {
+        box-sizing: border-box;
+        background: url("/medias/comment_bg.png") 100% 100% no-repeat;
+    }
+
+    #vcomments p {
+        margin: 2px 2px 10px;
+        font-size: 1.05rem;
+        line-height: 1.78rem;
+    }
+
+    #vcomments blockquote p {
+        text-indent: 0.2rem;
+    }
+
+    #vcomments a {
+        padding: 0 2px;
+        color: #4cbf30;
+        font-weight: 500;
+        text-decoration: none;
+    }
+
+    #vcomments img {
+        max-width: 100%;
+        height: auto;
+        cursor: pointer;
+    }
+
+    #vcomments ol li {
+        list-style-type: decimal;
+    }
+
+    #vcomments ol,
+    ul {
+        display: block;
+        padding-left: 2em;
+        word-spacing: 0.05rem;
+    }
+
+    #vcomments ul li,
+    ol li {
+        display: list-item;
+        line-height: 1.8rem;
+        font-size: 1rem;
+    }
+
+    #vcomments ul li {
+        list-style-type: disc;
+    }
+
+    #vcomments ul ul li {
+        list-style-type: circle;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    #vcomments table, th, td {
+        border: 0;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments h1 {
+        font-size: 1.85rem;
+        font-weight: bold;
+        line-height: 2.2rem;
+    }
+
+    #vcomments h2 {
+        font-size: 1.65rem;
+        font-weight: bold;
+        line-height: 1.9rem;
+    }
+
+    #vcomments h3 {
+        font-size: 1.45rem;
+        font-weight: bold;
+        line-height: 1.7rem;
+    }
+
+    #vcomments h4 {
+        font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    #vcomments h5 {
+        font-size: 1.1rem;
+        font-weight: bold;
+        line-height: 1.4rem;
+    }
+
+    #vcomments h6 {
+        font-size: 1rem;
+        line-height: 1.3rem;
+    }
+
+    #vcomments p {
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    #vcomments hr {
+        margin: 12px 0;
+        border: 0;
+        border-top: 1px solid #ccc;
+    }
+
+    #vcomments blockquote {
+        margin: 15px 0;
+        border-left: 5px solid #42b983;
+        padding: 1rem 0.8rem 0.3rem 0.8rem;
+        color: #666;
+        background-color: rgba(66, 185, 131, .1);
+    }
+
+    #vcomments pre {
+        font-family: monospace, monospace;
+        padding: 1.2em;
+        margin: .5em 0;
+        background: #272822;
+        overflow: auto;
+        border-radius: 0.3em;
+        tab-size: 4;
+    }
+
+    #vcomments code {
+        font-family: monospace, monospace;
+        padding: 1px 3px;
+        font-size: 0.92rem;
+        color: #e96900;
+        background-color: #f8f8f8;
+        border-radius: 2px;
+    }
+
+    #vcomments pre code {
+        font-family: monospace, monospace;
+        padding: 0;
+        color: #e8eaf6;
+        background-color: #272822;
+    }
+
+    #vcomments pre[class*="language-"] {
+        padding: 1.2em;
+        margin: .5em 0;
+    }
+
+    #vcomments code[class*="language-"],
+    pre[class*="language-"] {
+        color: #e8eaf6;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+
+    #vcomments b,
+    strong {
+        font-weight: bold;
+    }
+
+    #vcomments dfn {
+        font-style: italic;
+    }
+
+    #vcomments small {
+        font-size: 85%;
+    }
+
+    #vcomments cite {
+        font-style: normal;
+    }
+
+    #vcomments mark {
+        background-color: #fcf8e3;
+        padding: .2em;
+    }
+
+    #vcomments table, th, td {
+        padding: 12px 13px;
+        border: 1px solid #dfe2e5;
+    }
+
+    table tr:nth-child(2n), thead {
+        background-color: #fafafa;
+    }
+
+    #vcomments table th {
+        background-color: #f2f2f2;
+        min-width: 80px;
+    }
+
+    #vcomments table td {
+        min-width: 80px;
+    }
+
+    #vcomments [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+        position: inherit;
+        margin-left: -1.3rem;
+        margin-right: 0.4rem;
+        margin-top: -1px;
+        vertical-align: middle;
+        left: unset;
+        visibility: visible;
+    }
+</style>
+
+<div class="card valine-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="vcomments" class="card-content" style="display: grid">
+    </div>
+</div>
+
+<script src="/libs/valine/av-min.js"></script>
+<script src="/libs/valine/Valine.min.js"></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        appId: 'ws4Mfhiq4tK7GyRGGLMQvyvH-gzGzoHsz',
+        appKey: 'dhYshvW7YvmvHdVqNR0khqwg',
+        notify: 'true' === 'true',
+        verify: 'true' === 'true',
+        visitor: 'true' === 'true',
+        avatar: 'mm',
+        pageSize: '10',
+        lang: 'zh-cn',
+        placeholder: 'just go go'
+    });
+</script>
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/02/03/cpp-kang-fu-ji-hua/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/site%20(2).jpg" class="responsive-img" alt="Cpp康复计划">
+                        
+                        <span class="card-title">Cpp康复计划</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-02-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/record/" class="post-category">
+                                    record
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C/">
+                        <span class="chip bg-color">C++</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/09/30/hadoop-cong-ling-kai-shi-da-jian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/site%20(9).jpg" class="responsive-img" alt="Hadoop从零开始搭建并运行词频统计">
+                        
+                        <span class="card-title">Hadoop从零开始搭建并运行词频统计</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-30
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/hadoop/" class="post-category">
+                                    hadoop
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/hadoop/">
+                        <span class="chip bg-color">hadoop</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Cat-Blog<br />'
+            + '文章作者: Democat<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="6694416570"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='false'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <span id="year">2022</span>
+            <a href="/about" target="_blank">Democat</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">14.4k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2022";
+                    var startMonth = "7";
+                    var startDate = "14";
+                    var startHour = "10";
+                    var startMinute = "30";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="https://beian.miit.gov.cn/" target="_blank">黔ICP备2022004899号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/bug-cat-iu" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1326627677@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1326627677" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1326627677" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+    <!--浏览器搞笑标题-->
+    <script type="text/javascript" src="\js\FunnyTitle.js"></script>
+    <!-- 雪花特效 -->
+    <script type="text/javascript" src="\js\snow.js"></script>
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/z16.model.json"},"display":{"position":"right","width":200,"height":400},"mobile":{"show":true},"log":false});</script><script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var e=n.imageLazyLoadSetting.isSPA,i=n.imageLazyLoadSetting.preloadRatio||1,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight*i||document.documentElement.clientHeight*i)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},t.src!==i&&(n.src=i)}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+
+</html>
